@@ -14,7 +14,11 @@ let initWebRoutes = (app) => {
 
     router.get("/crud", crudController.getView);
     router.post("/post-create-user", crudController.postCreateUser);
-    
+
+    router.get("/update-user", crudController.editUser);
+    router.post("/post-update-user", crudController.postUpdateUser);
+
+    router.get("/delete-user", crudController.deleteUser);
 
     return app.use("/", router)
 }

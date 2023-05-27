@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nguyên Nguyễn</title>
+    <title>Sửa user <%= getUserInfoById.firstName %></title>
     <!-- Latest compiled and minified CSS -->
     <link
       rel="stylesheet"
@@ -23,9 +23,9 @@
   <body>
     <div class="my-5">
       <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
           <div class="col-md-6">
-            <form action="/post-create-user" method="post">
+            <form action="/post-update-user" method="post">
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Email</label>
@@ -36,17 +36,17 @@
                     placeholder="Email"
                     name="email"
                     required
+                    value="<%= getUserInfoById.email %>"
                   />
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="inputPassword4">Password</label>
+                  <label for="inputPhone">Phone</label>
                   <input
-                    type="password"
+                    type="text"
                     class="form-control"
-                    id="inputPassword4"
-                    placeholder="Password"
-                    name="password"
-                    required
+                    id="inputPhone"
+                    name="phone"
+                    value="<%= getUserInfoById.phone %>"
                   />
                 </div>
               </div>
@@ -59,6 +59,7 @@
                     id="inputFirstName"
                     placeholder="First name"
                     name="first_name"
+                    value="<%= getUserInfoById.firstName %>"
                   />
                 </div>
                 <div class="form-group col-md-6">
@@ -69,6 +70,7 @@
                     id="inputLastname"
                     placeholder="Last name"
                     name="last_name"
+                    value="<%= getUserInfoById.lastName %>"
                   />
                 </div>
               </div>
@@ -80,61 +82,14 @@
                   id="inputAddress"
                   placeholder="1234 Main St"
                   name="address"
+                  value="<%= getUserInfoById.address %>"
                 />
               </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputPhone">Phone</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="inputPhone"
-                    name="phone"
-                  />
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPosition">Position</label>
-                  <select
-                    id="inputPosition"
-                    class="form-control"
-                    name="positionId"
-                  >
-                    <option value="P0">Bác sĩ</option>
-                    <option value="P1">Thạc sĩ</option>
-                    <option value="P2">Tiến sĩ</option>
-                    <option value="P3">Giáo sư</option>
-                    <option value="P4">Phó giáo sư</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputSex">Sex</label>
-                  <select id="inputPosition" class="form-control" name="gender">
-                    <option value="0">Nam</option>
-                    <option value="1">Nữ</option>
-                    <option value="2">Khác</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputPosition">Role</label>
-                  <select id="inputPosition" class="form-control" name="roleId">
-                    <option value="R1">Admin</option>
-                    <option value="R2">Doctor</option>
-                    <option value="R3">Patient</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputAvatar">Avatar</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputAvatar"
-                  placeholder="Avatar"
-                  name="image"
-                />
-              </div>
+              <input
+                type="hidden"
+                name="userId"
+                value="<%= getUserInfoById.id %>"
+              />
               <button type="submit" class="btn btn-primary">Lưu</button>
             </form>
           </div>
