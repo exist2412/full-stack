@@ -20,6 +20,42 @@ let handleLogin = async (req, res) => {
     })
 }
 
+let getListUsers = async (req, res) => {
+    let id = req.query.id; // single, many
+    if (!id) {
+        return res.status(200).json({
+            errCode: 1,
+            errMessage: 'Missing required parameters',
+            listUsers: []
+        })
+    }
+    let listUsers = await userServices.getListUsers(id);
+    return res.status(200).json({
+        errCode: 0,
+        errMessage: 'Ok',
+        listUsers
+    })
+}
+
+let postCreateUser = async (req, res) => {
+    let message = await userServices.postCreateUserAction(req.body);
+    return res.status(200).json(message);
+}
+
+let postEditUser = async (req, res) => {
+    let message = await userServices.updateUser(req.body);
+    return res.status(200).json(message);
+}
+
+let postDeleteUser = async (req, res) => {
+    let message = await userServices.deleteUserById(req.body.id);
+    return res.status(200).json(message);
+}
+
 module.exports = {
     handleLogin: handleLogin,
+    getListUsers: getListUsers,
+    postCreateUser: postCreateUser,
+    postEditUser: postEditUser,
+    postDeleteUser: postDeleteUser
 }
