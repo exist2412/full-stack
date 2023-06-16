@@ -64,14 +64,14 @@ let getListUsers = (userId) => {
             let users = '';
             if (userId === 'all') {
                 users = await db.User.findAll({
-                    attributes: ['email','firstName','lastName','phone','address'],
+                    attributes: ['id','email','firstName','lastName','phone','address'],
                     raw: true,
                 })
             }
             
             if (userId && userId !== 'all') {
                 users = await db.User.findOne({
-                    attributes: ['email','firstName','lastName','phone','address'],
+                    attributes: ['id','email','firstName','lastName','phone','address'],
                     where: {
                         id: userId,
                     },
@@ -171,7 +171,7 @@ let deleteUserById = (userID) => {
                 where: { id: userID },
                 raw: false
             });
-            
+            console.log(userInfo);
             if(userInfo) {
                 await userInfo.destroy();
                 resolve({
