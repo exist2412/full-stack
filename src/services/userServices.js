@@ -112,8 +112,8 @@ let postCreateUserAction = (data) => {
                 await db.User.create({
                     email: data.email,
                     password: hashPasswordByBcryptjs,
-                    firstName: data.first_name,
-                    lastName: data.last_name,
+                    firstName: data.firstName,
+                    lastName: data.lastName,
                     phone: data.phone,
                     address: data.address,
                     positionId: data.positionId,
@@ -123,7 +123,7 @@ let postCreateUserAction = (data) => {
                 });
                 resolve({
                     errCode: 0,
-                    message: 'Thêm người dùng thành công'
+                    message: 'Thêm người dùng thành công',
                 });
             }
         } catch (e) {
@@ -173,12 +173,11 @@ let deleteUserById = (userID) => {
             });
             
             if(userInfo) {
-                console.log(userInfo);
                 await userInfo.destroy();
                 resolve({
                     errCode: 0,
                     massage: 'Xóa người dùng thành công'
-                });
+                });    
             } else {
                 resolve({
                     errCode: 1,

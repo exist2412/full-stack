@@ -38,8 +38,10 @@ let getListUsers = async (req, res) => {
 }
 
 let postCreateUser = async (req, res) => {
-    let message = await userServices.postCreateUserAction(req.body);
-    return res.status(200).json(message);
+    let result = await userServices.postCreateUserAction(req.body);
+    return res.status(200).json({
+        result
+    });
 }
 
 let postEditUser = async (req, res) => {
