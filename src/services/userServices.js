@@ -64,14 +64,14 @@ let getListUsers = (userId) => {
             let users = '';
             if (userId === 'all') {
                 users = await db.User.findAll({
-                    attributes: ['id','email','firstName','lastName','phone','address'],
+                    attributes: ['id','email','firstName','lastName','phone','address','positionId','roleId','gender'],
                     raw: true,
                 })
             }
             
             if (userId && userId !== 'all') {
                 users = await db.User.findOne({
-                    attributes: ['id','email','firstName','lastName','phone','address'],
+                    attributes: ['id','email','firstName','lastName','phone','address','positionId','roleId','gender'],
                     where: {
                         id: userId,
                     },
@@ -133,20 +133,29 @@ let postCreateUserAction = (data) => {
 }
 
 let updateUser = (data) => {
+    
     return new Promise(async (resolve, reject) => {
         try {
-            //console.log(data.userId);
-            if (data.id) {
-                let userInfo = await db.User.findOne({ 
-                    where: { id: data.id },
-                    raw: false
+            if (!data.data.id) {
+                
+                resolve({
+                    errCode: 2,
+                    message: 'Người dùng không tồn tại'
                 });
             }
-            
+
+            let userInfo = await db.User.findOne({ 
+                where: { id: data.data.id },
+                raw: false
+            });
             if(userInfo) {
-                userInfo.phone = data.phone;
-                userInfo.firstName = data.first_name;
-                userInfo.address = data.address;
+                userInfo.phone = data.data.phone;
+                userInfo.firstName = data.data.firstName;
+                userInfo.lastName = data.data.lastName;
+                userInfo.address = data.data.address;
+                userInfo.positionId = data.data.positionId;
+                userInfo.roleId = data.data.roleId;
+                userInfo.gender = data.data.gender;
                 await userInfo.save();
                 resolve({
                     errCode: 0,
