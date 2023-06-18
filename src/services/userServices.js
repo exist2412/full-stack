@@ -133,10 +133,9 @@ let postCreateUserAction = (data) => {
 }
 
 let updateUser = (data) => {
-    
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.data.id) {
+            if (!data.id) {
                 
                 resolve({
                     errCode: 2,
@@ -145,17 +144,17 @@ let updateUser = (data) => {
             }
 
             let userInfo = await db.User.findOne({ 
-                where: { id: data.data.id },
+                where: { id: data.id },
                 raw: false
             });
             if(userInfo) {
-                userInfo.phone = data.data.phone;
-                userInfo.firstName = data.data.firstName;
-                userInfo.lastName = data.data.lastName;
-                userInfo.address = data.data.address;
-                userInfo.positionId = data.data.positionId;
-                userInfo.roleId = data.data.roleId;
-                userInfo.gender = data.data.gender;
+                userInfo.phone = data.phone;
+                userInfo.firstName = data.firstName;
+                userInfo.lastName = data.lastName;
+                userInfo.address = data.address;
+                userInfo.positionId = data.positionId;
+                userInfo.roleId = data.roleId;
+                userInfo.gender = data.gender;
                 await userInfo.save();
                 resolve({
                     errCode: 0,
@@ -176,23 +175,24 @@ let updateUser = (data) => {
 let deleteUserById = (userID) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let userInfo = await db.User.findOne({ 
-                where: { id: userID },
-                raw: false
-            });
-            console.log(userInfo);
-            if(userInfo) {
-                await userInfo.destroy();
-                resolve({
-                    errCode: 0,
-                    massage: 'Xóa người dùng thành công'
-                });    
-            } else {
-                resolve({
-                    errCode: 1,
-                    massage: 'Not found user'
-                });
-            }
+            console.log(userID)
+            // let userInfo = await db.User.findOne({ 
+            //     where: { id: userID },
+            //     raw: false
+            // });
+            
+            // if(userInfo) {
+            //     await userInfo.destroy();
+            //     resolve({
+            //         errCode: 0,
+            //         massage: 'Xóa người dùng thành công'
+            //     });    
+            // } else {
+            //     resolve({
+            //         errCode: 1,
+            //         massage: 'Not found user'
+            //     });
+            // }
         } catch (e) {
             reject(e);
         }
