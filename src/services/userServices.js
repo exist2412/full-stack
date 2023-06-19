@@ -175,24 +175,24 @@ let updateUser = (data) => {
 let deleteUserById = (userID) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(userID)
-            // let userInfo = await db.User.findOne({ 
-            //     where: { id: userID },
-            //     raw: false
-            // });
+            //console.log(userID)
+            let userInfo = await db.User.findOne({ 
+                where: { id: userID },
+                raw: false
+            });
             
-            // if(userInfo) {
-            //     await userInfo.destroy();
-            //     resolve({
-            //         errCode: 0,
-            //         massage: 'Xóa người dùng thành công'
-            //     });    
-            // } else {
-            //     resolve({
-            //         errCode: 1,
-            //         massage: 'Not found user'
-            //     });
-            // }
+            if(userInfo) {
+                await userInfo.destroy();
+                resolve({
+                    errCode: 0,
+                    massage: 'Xóa người dùng thành công'
+                });    
+            } else {
+                resolve({
+                    errCode: 1,
+                    massage: 'Not found user'
+                });
+            }
         } catch (e) {
             reject(e);
         }
