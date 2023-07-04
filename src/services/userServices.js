@@ -199,10 +199,37 @@ let deleteUserById = (userID) => {
     })
 }
 
+// let getPermissionService = (typeInput) => {
+//     return new Promise(async(resolve, reject) => {
+//         try {
+//             if(!typeInput) {
+//                 resolve({
+//                     errCode: 1,
+//                     massage: 'Missing required parameter'
+//                 });
+//             } else {
+//                 let res = {};
+//                 let permission = await db.Permission.findAll({
+//                     where: {
+//                         type: typeInput
+//                     }
+//                 });
+//                 res.errCode = 0;
+//                 res.data = permission;
+//                 resolve(res);
+//             }
+            
+//         } catch (e) {
+//             reject(e);
+//         }
+//     })
+// }
+
 module.exports = {
     handleUserLogin: handleUserLogin,
     getListUsers: getListUsers,
     postCreateUserAction: postCreateUserAction,
     deleteUserById: deleteUserById,
-    updateUser: updateUser
+    updateUser: updateUser,
+    // getPermissionService: getPermissionService
 }

@@ -54,10 +54,23 @@ let postDeleteUser = async (req, res) => {
     return res.status(200).json(message);
 }
 
+// let getPermission = async (req, res) => {
+//     try {
+//         let permission = await userServices.getPermissionService(req.query.type);
+//         return res.status(200).json(permission);
+//     } catch (e) {
+//         return res.status(200).json({
+//             errCode: -1,
+//             Massage: 'Lỗi'
+//         })
+//     }
+// }
+
 module.exports = {
     handleLogin: handleLogin,
     getListUsers: getListUsers,
     postCreateUser: postCreateUser,
     postEditUser: postEditUser,
-    postDeleteUser: postDeleteUser
+    postDeleteUser: postDeleteUser,
+    // getPermission: getPermission
 }
