@@ -10,7 +10,7 @@ let handleUserLogin = (email, password) => {
             let isExist = await checkEmail(email);
             if (isExist) {
                 let user = await db.User.findOne({
-                    attributes: ['email','password','firstName','lastName','phone'],
+                    attributes: ['email','password','firstName','lastName','phone', 'roleId'],
                     where: {
                         email: email,
                     },
@@ -199,31 +199,31 @@ let deleteUserById = (userID) => {
     })
 }
 
-// let getPermissionService = (typeInput) => {
-//     return new Promise(async(resolve, reject) => {
-//         try {
-//             if(!typeInput) {
-//                 resolve({
-//                     errCode: 1,
-//                     massage: 'Missing required parameter'
-//                 });
-//             } else {
-//                 let res = {};
-//                 let permission = await db.Permission.findAll({
-//                     where: {
-//                         type: typeInput
-//                     }
-//                 });
-//                 res.errCode = 0;
-//                 res.data = permission;
-//                 resolve(res);
-//             }
+let getPermissionService = (typeInput) => {
+    return new Promise(async(resolve, reject) => {
+        try {
+            if(!typeInput) {
+                resolve({
+                    errCode: 1,
+                    massage: 'Missing required parameter'
+                });
+            } else {
+                let res = {};
+                let permission = await db.Permission.findAll({
+                    where: {
+                        type: typeInput
+                    }
+                });
+                res.errCode = 0;
+                res.data = permission;
+                resolve(res);
+            }
             
-//         } catch (e) {
-//             reject(e);
-//         }
-//     })
-// }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 
 module.exports = {
     handleUserLogin: handleUserLogin,
@@ -231,5 +231,5 @@ module.exports = {
     postCreateUserAction: postCreateUserAction,
     deleteUserById: deleteUserById,
     updateUser: updateUser,
-    // getPermissionService: getPermissionService
+    getPermissionService: getPermissionService
 }

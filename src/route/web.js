@@ -30,7 +30,7 @@ let initWebRoutes = (app) => {
     router.delete("/api/delete-user", userController.postDeleteUser);
 
     // api permission
-    // router.get("/api/get-permission", userController.getPermission);
+    router.get("/api/get-permission", userController.getPermission);
     
     
     return app.use("/", router)
